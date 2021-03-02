@@ -4,8 +4,8 @@ jobs:
     docker:
       - image: rust:1.50.0-alpine3.12
     steps:
-    	- checkout
-    	#- run:
+      - checkout
+      #- run:
       #    name: "TargetAddWASM"
       #    command: rustup target add wasm32-unknown-unknown
       - run:
