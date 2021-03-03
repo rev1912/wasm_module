@@ -5,14 +5,17 @@ jobs:
       - image: rust:1.50.0-slim
     steps:
       - checkout
+      - run:
+          name: "TargetAddWASM"
+          command: rustup target add wasm32-unknown-unknown
       #- run:
-      #    name: "TargetAddWASM"
-      #    command: rustup target add wasm32-unknown-unknown
+      #    name: "PKGConfig"
+      #    command: apt-get -y update && apt-get -y upgrade && apt-get -y install pkg-config libssl-dev
+      #- run:
+      #    name: "WASMPack"
+      #    command: mkdir crates crates/bin && cargo install wasm-pack --root crates
       - run:
-          name: "PKGConfig"
-          command: apt-get -y update && apt-get -y upgrade && apt-get -y install pkg-config libssl-dev
-      - run:
-          name: "WASMPack"
-          command: mkdir crates crates/bin && cargo install wasm-pack --root crates
+          name: "Build"
+          command: export PATH="~/project/crates/bin:$PATH" && chmod +x crates/bin/wasm-pack && wasm-pack build
       - store_artifacts:
-          path: crates
+          path: target
