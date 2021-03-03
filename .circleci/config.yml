@@ -18,4 +18,4 @@ jobs:
           name: "Build"
           command: export PATH="~/project/crates/bin:$PATH" && chmod +x crates/bin/wasm-pack && wasm-pack build
       - store_artifacts:
-          path: target
+          path: pkg 
