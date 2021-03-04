@@ -17,6 +17,6 @@ jobs:
       #    command: mkdir crates crates/bin && cargo install wasm-pack --root crates export PATH="~/project/crates/bin:$PATH" && chmod +x crates/bin/wasm-pack && wasm-pack build
       - run:
           name: "Build"
-          command: apt-get -y install libxss-dev && cargo build --target wasm32-unknown-emscripten && ls
+          command: apt-get -y update && apt-get -y upgrade && apt-get -y install libxss-dev && cargo build --target wasm32-unknown-emscripten && ls
       - store_artifacts:
           path: target  
