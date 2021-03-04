@@ -3,19 +3,20 @@ jobs:
   build:
     docker:
       - image: rust:1.50.0-slim
+      - image: emscripten/emsdk:2.0.14
     steps:
       - checkout
       - run:
           name: "TargetAddWASM"
-          command: rustup target add wasm32-unknown-unknown
+          command: rustup target add wasm32-unknown-emscripten
       #- run:
       #    name: "PKGConfig"
       #    command: apt-get -y update && apt-get -y upgrade && apt-get -y install pkg-config libssl-dev
       #- run:
       #    name: "WASMPack"
-      #    command: mkdir crates crates/bin && cargo install wasm-pack --root crates
+      #    command: mkdir crates crates/bin && cargo install wasm-pack --root crates export PATH="~/project/crates/bin:$PATH" && chmod +x crates/bin/wasm-pack && wasm-pack build
       - run:
           name: "Build"
-          command: export PATH="~/project/crates/bin:$PATH" && chmod +x crates/bin/wasm-pack && wasm-pack build
+          command: cargo build --target wasm32-unknown-emscripten --out-dir pkg
       - store_artifacts:
           path: pkg 

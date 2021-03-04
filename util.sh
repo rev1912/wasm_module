@@ -12,4 +12,7 @@ case $1 in
 		| grep -o 'https://[^"]*' \
 		| wget --verbose --header "Circle-Token: $TOKEN" --input-file -
 		;;
+	parse)
+		./wabt/bin/wasm2wat pkg/*.wasm -o wasm_module.wat
+		;;
 esac
