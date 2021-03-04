@@ -17,6 +17,6 @@ jobs:
       #    command: mkdir crates crates/bin && cargo install wasm-pack --root crates export PATH="~/project/crates/bin:$PATH" && chmod +x crates/bin/wasm-pack && wasm-pack build
       - run:
           name: "Build"
-          command: cargo build --target wasm32-unknown-emscripten --out-dir pkg
+          command: cargo build --target wasm32-unknown-emscripten && ls
       - store_artifacts:
-          path: pkg 
+          path: target  
