@@ -1,4 +1,3 @@
-use wasm_bindgen::prelude::*;
 use mogwai::prelude::*;
 
 #[derive(Clone)]
@@ -11,12 +10,10 @@ enum Out {
     DrawClicks(i32)
 }
 
-#[wasm_bindgen]
-pub struct App {
+struct App {
     num_clicks: i32
 }
 
-#[wasm_bindgen]
 impl Component for App {
     type ModelMsg = In;
     type ViewMsg = Out;
@@ -47,9 +44,9 @@ impl Component for App {
     }
 }
 
-#[wasm_bindgen]
-pub fn main(struc: App) -> Result<(), JsValue> {
-    let app = Gizmo::from(struc);
+
+pub fn main() -> Result<(), JsValue> {
+    let app = Gizmo::from(App{ num_clicks: 0 });
 
     if cfg!(target_arch = "wasm32") {
         View::from(app).run()
