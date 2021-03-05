@@ -1,3 +1,4 @@
+use wasm_bindgen::prelude::*;
 use mogwai::prelude::*;
 
 #[derive(Clone)]
@@ -21,7 +22,7 @@ impl Component for App {
     type ViewMsg = Out;
     type DomNode = HtmlElement;
 
-    pub fn view(&self, tx: &Transmitter<In>, rx: &Receiver<Out>) -> ViewBuilder<HtmlElement> {
+    fn view(&self, tx: &Transmitter<In>, rx: &Receiver<Out>) -> ViewBuilder<HtmlElement> {
         builder! {
             <button on:click=tx.contra_map(|_| In::Click)>
                 {(
@@ -36,7 +37,7 @@ impl Component for App {
         }
     }
 
-    pub fn update(&mut self, msg: &In, tx_view: &Transmitter<Out>, _sub: &Subscriber<In>) {
+    fn update(&mut self, msg: &In, tx_view: &Transmitter<Out>, _sub: &Subscriber<In>) {
         match msg {
             In::Click => {
                 self.num_clicks += 1;
