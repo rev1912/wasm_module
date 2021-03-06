@@ -7,6 +7,8 @@ case $1 in
 		git push origin master
 		;;
 	get)
+		cd pkg
+		rm * .*
 		read TOKEN
 		curl -H "Circle-Token: $TOKEN" https://circleci.com/api/v1.1/project/github/rev1912/wasm_module/latest/artifacts \
 		| grep -o 'https://[^"]*' \
